@@ -50,12 +50,30 @@
             ]
         }
     ],
+    "staticTabs": [
+        {
+            "entityId": "rescue",
+            "name": "Rescue",
+            "contentUrl": "https://[FRONTEND_DOMAIN]",
+            "websiteUrl": "https://[FRONTEND_DOMAIN]",
+            "scopes": [
+                "personal"
+            ]
+        },
+        {
+            "entityId": "about",
+            "scopes": [
+                "personal"
+            ]
+        }
+    ],
     "composeExtensions": [],
     "configurableTabs": [],
-    "staticTabs": [],
     "permissions": [
         "identity",
         "messageTeamMembers"
     ],
-    "validDomains": []
+    "validDomains": [
+        "[FRONTEND_DOMAIN]"
+    ]
 }

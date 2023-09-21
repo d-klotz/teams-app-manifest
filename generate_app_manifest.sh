@@ -17,21 +17,25 @@ targetEnv=("dev" "stage" "prod" "local");
 appId_prod=""
 botId_prod=""
 botName_prod=""
+frontendDomain_prod=""
 appversion_prod="1.0.0"
 
 appId_stage=""
 botId_stage=""
 botName_stage=""
+frontendDomain_stage=""
 appversion_stage="1.0.0"
 
 appId_dev=""
 botId_dev=""
 botName_dev=""
+frontendDomain_dev=""
 appversion_dev="1.0.0"
 
 appId_local=""
 botId_local=""
-botName_local="My First Bot"
+botName_local="Rescue Bot"
+frontendDomain_local=""
 appversion_local="1.0.0"
 
 generate_manifest () {
@@ -40,16 +44,17 @@ generate_manifest () {
   appId="appId_$env"
   botId="botId_$env"
   botName="botName_$env"
+  frontendDomain="frontendDomain_$env"
   appversion="appversion_$env"
 
-  if [[ -d "$env" ]]; 
+  if [[ -d "$env" ]];
   then
     rm -rf $env
     echo "Removed previously generated $env"
-    mkdir "$env" 
+    mkdir "$env"
   fi
 
-  if [[ -f "App_"$env".zip" ]]; 
+  if [[ -f "App_"$env".zip" ]];
   then
     echo "Removed previously generated App_$env.zip"
     rm -rf App_"$env".zip
@@ -59,11 +64,11 @@ generate_manifest () {
   find "$env" -type f -name "*.json" -exec sed -i '' "s/\[BOT_NAME\]/${!botName}/g" {} +
   if [[ 'prod' =~ $env ]];
   then
-    sed -e "s/\[TEAMS_APP_ID\]/${!appId}/;s/\[BOT_ID\]/${!botId}/;s/\[APP_VERSION\]/${!appversion}/;s/\[BOT_NAME\]/${!botName}/" \
+    sed -e "s/\[TEAMS_APP_ID\]/${!appId}/;s/\[BOT_ID\]/${!botId}/;s/\[FRONTEND_DOMAIN\]/${!frontendDomain}/;s/\[APP_VERSION\]/${!appversion}/;s/\[BOT_NAME\]/${!botName}/" \
     -e "s/\[ENV\]//" -e "/ngrok/d"\
     manifest_TEMPLATE.json > "$env"/manifest.json
   else
-    sed -e "s/\[TEAMS_APP_ID\]/${!appId}/;s/\[BOT_ID\]/${!botId}/;s/\[APP_VERSION\]/${!appversion}/;s/\[BOT_NAME\]/${!botName}/" \
+    sed -e "s/\[TEAMS_APP_ID\]/${!appId}/;s/\[BOT_ID\]/${!botId}/;s/\[FRONTEND_DOMAIN\]/${!frontendDomain}/;s/\[APP_VERSION\]/${!appversion}/;s/\[BOT_NAME\]/${!botName}/" \
     -e "s/\[ENV\]/$(printf "%s%s" ' ' "$capitalizedEnv")/" \
     manifest_TEMPLATE.json > "$env"/manifest.json
   fi
