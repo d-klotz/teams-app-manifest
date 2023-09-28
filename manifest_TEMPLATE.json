@@ -46,6 +46,30 @@
                             "description": "A helloworld command to send a welcome message"
                         }
                     ]
+                },
+                {
+                    "scopes": [
+                        "personal",
+                        "team",
+                        "groupchat"
+                    ],
+                    "commands": [
+                        {
+                            "title": "create ticket",
+                            "description": "Create a new helpdesk ticket"
+                        }
+                    ]
+                },
+                {
+                    "scopes": [
+                        "groupchat"
+                    ],
+                    "commands": [
+                        {
+                            "title": "remote session",
+                            "description": "You gain control of a remote PC or Mac in seconds by using Teams"
+                        }
+                    ]
                 }
             ]
         }
